@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <!--<Nullable>enable</Nullable>-->
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>9283a10c-0d3a-45d0-894c-cbb3f1bcd074</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EFxceptions" Version="0.4.5" />
+			<PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.0.0-rc.1" />
+			<PackageReference Include="EFxceptions" Version="0.4.5" />
     <PackageReference Include="MassTransit" Version="8.0.7" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0-rc.2.22476.2" />

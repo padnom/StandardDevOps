@@ -7,6 +7,7 @@ using StandardDevOpsApi.Services.Foundations.StudentEvents;
 using StandardDevOpsApi.Services.Foundations.Students;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
+using StandardDevOpsApi.Brokers.Apis.ElasticApis;
 
 namespace StandardDevOpsApi.Controllers
 {
@@ -16,24 +17,26 @@ namespace StandardDevOpsApi.Controllers
     {
         private readonly IStudentService studentService;
         private readonly IStudentEventService studentEventService;
+        private readonly IElasticApiBroker elasticApiBroker;
 
-        public StudentsController(IStudentService studentService,IStudentEventService studentEventService)
+        public StudentsController(IStudentService studentService,IStudentEventService studentEventService, IElasticApiBroker elasticApiBroker)
         {
             this.studentService = studentService;
             this.studentEventService = studentEventService;
+            this.elasticApiBroker = elasticApiBroker;
         }
 
         [HttpPost]
-        public async ValueTask<ActionResult<Student>> PostStudentAsync(Student student)
+        public async ValueTask<ActionResult<Student>> PostStudentAsync()
         {
             Guid studentId = Guid.NewGuid();
-            student = new Student
+            Student student = new Student
             {
                 Id = studentId,
-                Name = "name"
+                Name = "test"
             };
-            await studentEventService.PublishStudentToQueueAsync(student);
-
+            //await this.studentEventService.PublishStudentToQueueAsync(student);
+            await this.elasticApiBroker.InsertStudentAsync(student);
             return Created(student);
         }
     }

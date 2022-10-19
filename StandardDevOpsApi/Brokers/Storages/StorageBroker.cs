@@ -23,7 +23,7 @@ namespace StandardDevOpsApi.Brokers.Storages
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string connectionString =
-                this.configuration.GetConnectionString("DefaultConnection");
+                this.configuration.GetConnectionString("SqlServerConnection");
 
             optionsBuilder.UseSqlServer(connectionString);
         }

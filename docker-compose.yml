@@ -36,6 +36,10 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       # Bootstrap password.

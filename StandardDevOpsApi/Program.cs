@@ -1,3 +1,4 @@
+using StandardDevOpsApi.Brokers.Apis.ElasticApis;
 using StandardDevOpsApi.Brokers.Events;
 using StandardDevOpsApi.Brokers.Queues;
 using StandardDevOpsApi.Brokers.Storages;
@@ -29,6 +30,7 @@ builder.Services.AddSingleton<ILibraryAccountService, LibraryAccountService>();
 builder.Services.AddSingleton<ILibraryCardService, LibraryCardService>();
 builder.Services.AddSingleton<IStudentEventOrchestrationService, StudentEventOrchestrationService>();
 builder.Services.AddSingleton<ILibraryAccountOrchestrationService, LibraryAccountOrchestrationService>();
+builder.Services.AddSingleton<IElasticApiBroker, ElasticApiBroker>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
