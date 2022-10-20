@@ -29,15 +29,13 @@ namespace StandardDevOpsApi.Controllers
         [HttpPost]
         public async ValueTask<ActionResult<Student>> PostStudentAsync(string studentName)
         {
-            Guid studentId = Guid.NewGuid();
             Student student = new Student
             {
-                Id = studentId,
+                Id = Guid.NewGuid(),
                 Name = studentName
 
             };
             await this.studentEventService.PublishStudentToQueueAsync(student);
-            await this.elasticApiBroker.InsertStudentAsync(student);
             return Created(student);
         }
     }
