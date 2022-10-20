@@ -1,6 +1,8 @@
 # StandardDevOpsApi
 
-The goals it's to implements The Standard whith Devops Tools like (Docker,Docker-Compose,RabbitMq,ES...)
+The goals it's to implements The Standard with devops Tools like (Docker,Docker-Compose,RabbitMq,ES...) into dotNet environnement.
+Also to allow people to learn/use this differents tools.
+
 - https://github.com/hassanhabib/The-Standard
 - https://github.com/hassanhabib/CulDeSacDemoApi
 
