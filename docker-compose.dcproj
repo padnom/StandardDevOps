@@ -230,7 +230,6 @@
     <None Include="StandardDevOpsApi\Services\Orchestrations\StudentEvents\StudentEventOrchestrationService.cs" />
     <None Include="StandardDevOpsApi\StandardDevOpsApi.csproj" />
     <None Include="StandardDevOpsApi\StandardDevOpsApi.csproj.user" />
-    <None Include="StandardDevOpsApi\WeatherForecast.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="elasticsearch\obj\Docker\empty\" />

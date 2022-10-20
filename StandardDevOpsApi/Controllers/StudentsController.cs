@@ -27,15 +27,16 @@ namespace StandardDevOpsApi.Controllers
         }
 
         [HttpPost]
-        public async ValueTask<ActionResult<Student>> PostStudentAsync()
+        public async ValueTask<ActionResult<Student>> PostStudentAsync(string studentName)
         {
             Guid studentId = Guid.NewGuid();
             Student student = new Student
             {
                 Id = studentId,
-                Name = "test"
+                Name = studentName
+
             };
-            //await this.studentEventService.PublishStudentToQueueAsync(student);
+            await this.studentEventService.PublishStudentToQueueAsync(student);
             await this.elasticApiBroker.InsertStudentAsync(student);
             return Created(student);
         }
