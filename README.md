@@ -1,6 +1,6 @@
 # culsacdemoapiMT
 
-The goals it's to implements culssacdemoAPI whith RabbitMQ and Masstransit with respect of Standard a must have for best practice.
+The goals it's to implements The Standard whith Devops Tools like (Docker,Docker-Compose,RabbitMq,ES...)
 - https://github.com/hassanhabib/The-Standard
 - https://github.com/hassanhabib/CulDeSacDemoApi
 
