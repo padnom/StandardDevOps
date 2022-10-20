@@ -24,7 +24,7 @@ Into tab **Queues**
 
 Into tab **Exchanges**
 - Add a new exchange : 
-- Name : CulDeSacApi.Models.Students:Student
+- Name : StandardDevOpsApi.Models.Students:Student
 - Type : fanout
 
 - Click on Exchanges :
@@ -44,13 +44,13 @@ Into Visual Studio
 
  
  ### Publish Message 
-  - Go to the Url : http://localhost:15672/#/exchanges/%2F/CulDeSacApi.Models.Students%3AStudent
+  - Go to the Url : http://localhost:15672/#/exchanges/%2F/StandardDevOpsApi.Models.Students%3AStudent
   - Under Section Publish Message with a different guid (https://www.guidgenerator.com/) 
 
  ```json
  {
   "messageType": [
-    "urn:message:CulDeSacApi.Models.Students:Student"
+    "urn:message:StandardDevOpsApi.Models.Students:Student"
   ],
   "message": {
     "id": "70d62c31-b569-4775-86ea-f3e10a24ea6e",
