@@ -10,7 +10,7 @@ services:
   # any modification to existing users.
   setup:
     build:
-      context: setup/
+      context: dockers/setup/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     init: true
@@ -27,12 +27,12 @@ services:
 
   elasticsearch:
     build:
-      context: elasticsearch/
+      context: dockers/elasticsearch/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - ./volumes/elasticsearch:/usr/share/elasticsearch/data:z
+      - ./dockers/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - ./dockers/volumes/elasticsearch:/usr/share/elasticsearch/data:z
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -54,12 +54,12 @@ services:
 
   logstash:
     build:
-      context: logstash/
+      context: dockers/logstash/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+      - ./dockers/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+      - ./dockers/logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
     ports:
       - "5044:5044"
       - "50000:50000/tcp"
@@ -75,11 +75,11 @@ services:
 
   kibana:
     build:
-      context: kibana/
+      context: dockers/kibana/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
-      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+      - ./dockers/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
     ports:
       - "5601:5601"
     environment:
@@ -101,7 +101,7 @@ services:
     networks:
       - elk
     volumes:
-      - ./volumes/mssql:/var/opt/mssql/data
+      - ./dockers/volumes/mssql:/var/opt/mssql/data
 
   standarddevopsapi:
     image: ${DOCKER_REGISTRY-}standarddevopsapi
