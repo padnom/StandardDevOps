@@ -803,4 +803,7 @@
   <ItemGroup>
     <None Remove="logstash\**" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="dockers\volumes\**" />
+  </ItemGroup>
 </Project>
