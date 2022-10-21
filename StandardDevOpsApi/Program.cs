@@ -24,6 +24,7 @@ builder.Services.AddSingleton<IQueueBrokerMassTransit, QueueBrokerMassTransit>()
 builder.Services.AddSingleton<IQueueBroker, QueueBroker>();
 builder.Services.AddSingleton<IEventBroker, EventBroker>();
 builder.Services.AddSingleton<IStudentService, StudentService>();
+builder.Services.AddSingleton<IStudentIndexationService, StudentIndexationService>();
 builder.Services.AddSingleton<IStudentEventService, StudentEventServiceMassTransit>();
 builder.Services.AddSingleton<ILocalStudentEventService, LocalStudentEventService>();
 builder.Services.AddSingleton<ILibraryAccountService, LibraryAccountService>();

@@ -38,13 +38,13 @@ namespace StandardDevOpsApi.Services.Orchestrations.StudentEvents
                 service.AddStudentAsync(incomingStudent),
                     Times.Once);
 
-            this.localStudentEventService.Verify(broker =>
+            this.localStudentEventServiceMock.Verify(broker =>
                 broker.PublishStudentAsync(incomingStudent),
                     Times.Once);
 
             this.studentEventServiceMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
-            this.localStudentEventService.VerifyNoOtherCalls();
+            this.localStudentEventServiceMock.VerifyNoOtherCalls();
         }
     }
 }

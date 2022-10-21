@@ -15,11 +15,11 @@ namespace StandardDevOpsApi.Controllers
     [Route("api/[controller]")]
     public class StudentsController : RESTFulController
     {
-        private readonly IStudentService studentService;
+        private readonly IStudentIndexationService studentService;
         private readonly IStudentEventService studentEventService;
         private readonly IElasticApiBroker elasticApiBroker;
 
-        public StudentsController(IStudentService studentService,IStudentEventService studentEventService, IElasticApiBroker elasticApiBroker)
+        public StudentsController(IStudentIndexationService studentService,IStudentEventService studentEventService, IElasticApiBroker elasticApiBroker)
         {
             this.studentService = studentService;
             this.studentEventService = studentEventService;
