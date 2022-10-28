@@ -1,15 +1,17 @@
-﻿using StandardDevOpsApi.Brokers.Storages;
+﻿using Moq;
+
+using StandardDevOpsApi.Brokers.Storages;
 using StandardDevOpsApi.Models.LibraryAccounts;
 using StandardDevOpsApi.Services.Foundations.LibraryAccounts;
-using Moq;
+
 using Tynamix.ObjectFiller;
 
 namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.LibraryAccounts
 {
     public partial class LibraryAccountServiceTests
     {
-        private readonly Mock<IStorageBroker> storageBrokerMock;
         private readonly ILibraryAccountService libraryAccountService;
+        private readonly Mock<IStorageBroker> storageBrokerMock;
 
         public LibraryAccountServiceTests()
         {
@@ -19,10 +21,10 @@ namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.LibraryAccounts
                 storageBroker: storageBrokerMock.Object);
         }
 
-        private static LibraryAccount CreateRandomLibraryAcocunt() =>
-            CreateLibraryAccountFiller().Create();
-
         private static Filler<LibraryAccount> CreateLibraryAccountFiller() =>
             new Filler<LibraryAccount>();
+
+        private static LibraryAccount CreateRandomLibraryAcocunt() =>
+                    CreateLibraryAccountFiller().Create();
     }
 }

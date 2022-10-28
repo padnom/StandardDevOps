@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using StandardDevOpsApi.Models.Students;
-using MassTransit;
+﻿using MassTransit;
 
-using Microsoft.Azure.ServiceBus;
 using Moq;
+
+using StandardDevOpsApi.Models.Students;
+
 using Xunit;
 
 namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.StudentEvents

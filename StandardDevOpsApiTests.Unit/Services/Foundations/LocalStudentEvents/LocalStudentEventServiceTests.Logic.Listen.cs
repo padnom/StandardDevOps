@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Moq;
+
 using StandardDevOpsApi.Models.Students;
-using Moq;
+
 using Xunit;
 
 namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.LocalStudentEvents

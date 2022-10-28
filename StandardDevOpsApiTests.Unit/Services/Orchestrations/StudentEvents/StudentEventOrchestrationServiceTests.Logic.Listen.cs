@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Moq;
+
 using StandardDevOpsApi.Models.Students;
-using Moq;
+
 using Xunit;
 
 namespace StandardDevOpsApi.Services.Orchestrations.StudentEvents
@@ -14,7 +14,7 @@ namespace StandardDevOpsApi.Services.Orchestrations.StudentEvents
             // given
             Student randomStudent = CreateRandomStudent();
             Student incomingStudent = randomStudent;
-            
+
             var mockSequence = new MockSequence();
 
             this.studentEventServiceMock.InSequence(mockSequence).Setup(service =>
@@ -23,7 +23,7 @@ namespace StandardDevOpsApi.Services.Orchestrations.StudentEvents
                         eventFunction.Invoke(incomingStudent));
 
             this.studentServiceMock.InSequence(mockSequence).Setup(service =>
-                service.AddStudentAsync(incomingStudent))
+                service.RegisterStudentAsync(incomingStudent))
                     .ReturnsAsync(incomingStudent);
 
             // when
@@ -35,7 +35,7 @@ namespace StandardDevOpsApi.Services.Orchestrations.StudentEvents
                     Times.Once);
 
             this.studentServiceMock.Verify(service =>
-                service.AddStudentAsync(incomingStudent),
+                service.RegisterStudentAsync(incomingStudent),
                     Times.Once);
 
             this.localStudentEventServiceMock.Verify(broker =>

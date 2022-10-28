@@ -9,16 +9,18 @@ namespace StandardDevOpsApi.Brokers.Storages
     {
         public DbSet<Student> Students { get; set; }
 
-        public async ValueTask<Student> InsertStudentAsync(Student student)
-        {
-            using var broker = new StorageBroker(this.configuration);
+        public async ValueTask<Student> InsertStudentAsync(Student student) =>
+            await InsertAsync(student);
 
-            EntityEntry<Student> studentEntityEntry =
-                await broker.Students.AddAsync(student);
+        public IQueryable<Student> SelectAllStudents() => SelectAll<Student>();
 
-            await broker.SaveChangesAsync();
+        public async ValueTask<Student> SelectStudentByIdAsync(Guid studentId) =>
+            await SelectAsync<Student>(studentId);
 
-            return studentEntityEntry.Entity;
-        }
+        public async ValueTask<Student> UpdateStudentAsync(Student student) =>
+            await UpdateAsync(student);
+
+        public async ValueTask<Student> DeleteStudentAsync(Student student) =>
+            await DeleteAsync(student);
     }
 }

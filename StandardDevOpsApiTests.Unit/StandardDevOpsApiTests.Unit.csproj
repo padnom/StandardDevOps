@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -22,6 +22,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StandardDevOpsApi\StandardDevOpsApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Foundations\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,11 @@
-using System.Threading.Tasks;
-using StandardDevOpsApi.Models.Students;
 using FluentAssertions;
+
 using Force.DeepCloner;
+
 using Moq;
+
+using StandardDevOpsApi.Models.Students;
+
 using Xunit;
 
 namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.Students
@@ -24,7 +27,7 @@ namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.Students
 
             // when
             Student actualStudent = await this.studentService
-                .AddStudentAsync(inputStudent);
+                .RegisterStudentAsync(inputStudent);
 
             // then
             actualStudent.Should().BeEquivalentTo(expectedStudent);

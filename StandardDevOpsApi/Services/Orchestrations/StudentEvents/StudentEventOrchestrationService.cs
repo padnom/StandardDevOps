@@ -32,7 +32,7 @@ namespace StandardDevOpsApi.Services.Orchestrations.StudentEvents
         {
             this.studentEventService.ListenToStudentEvent(async (student) =>
             {
-                await this.studentService.AddStudentAsync(student);
+                await this.studentService.RegisterStudentAsync(student);
                 await this.localStudentEventService.PublishStudentAsync(student);
                 await this.studentIndexationService.AddStudentAsync(student);
             });

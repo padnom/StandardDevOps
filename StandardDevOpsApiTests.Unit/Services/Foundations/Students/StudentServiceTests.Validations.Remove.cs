@@ -1,0 +1,95 @@
+﻿// ---------------------------------------------------------------
+// Copyright (c) Coalition of the Good-Hearted Engineers
+// FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
+// ---------------------------------------------------------------
+
+using Moq;
+
+using StandardDevOpsApi.Models.Students;
+using StandardDevOpsApi.Models.Students.Exceptions;
+
+using Xunit;
+
+namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.Students
+{
+    public partial class StudentServiceTests
+    {
+        [Fact]
+        public async void ShouldThrowValidationExceptionOnDeleteWhenIdIsInvalidAndLogItAsync()
+        {
+            // given
+            Guid randomStudentId = default;
+            Guid inputStudentId = randomStudentId;
+
+            var invalidStudentException = new InvalidStudentException(
+                parameterName: nameof(Student.Id),
+                parameterValue: inputStudentId);
+
+            var expectedStudentValidationException =
+                new StudentValidationException(invalidStudentException);
+
+            // when
+            ValueTask<Student> deleteStudentTask =
+                this.studentService.RemoveStudentByIdAsync(inputStudentId);
+
+            // then
+            await Assert.ThrowsAsync<StudentValidationException>(() =>
+                deleteStudentTask.AsTask());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedStudentValidationException))),
+                        Times.Once);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.DeleteStudentAsync(It.IsAny<Student>()),
+                    Times.Never);
+
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async void ShouldThrowValidationExceptionOnDeleteWhenStorageStudentIsNullAndLogItAsync()
+        {
+            // given
+            Guid randomStudentId = Guid.NewGuid();
+            Guid inputStudentId = randomStudentId;
+            Student invalidStorageStudent = null;
+            var notFoundStudentException = new NotFoundStudentException(inputStudentId);
+
+            var expectedStudentValidationException =
+                new StudentValidationException(notFoundStudentException);
+
+            this.storageBrokerMock.Setup(broker =>
+                broker.SelectStudentByIdAsync(inputStudentId))
+                    .ReturnsAsync(invalidStorageStudent);
+
+            // when
+            ValueTask<Student> deleteStudentTask =
+                this.studentService.RemoveStudentByIdAsync(inputStudentId);
+
+            // then
+            await Assert.ThrowsAsync<StudentValidationException>(() =>
+                deleteStudentTask.AsTask());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedStudentValidationException))),
+                        Times.Once);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.SelectStudentByIdAsync(inputStudentId),
+                    Times.Once);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.DeleteStudentAsync(It.IsAny<Student>()),
+                    Times.Never);
+
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
+        }
+    }
+}

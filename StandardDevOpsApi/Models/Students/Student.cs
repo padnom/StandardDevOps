@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using StandardDevOpsApi.Models.LibraryAccounts;
+﻿using StandardDevOpsApi.Models.LibraryAccounts;
 
 namespace StandardDevOpsApi.Models.Students
 {
     public class Student
     {
+        public string FirstName { get; set; }
         public Guid Id { get; set; }
-        public string Name { get; set; }
-
         public LibraryAccount LibraryAccount { get; set; }
+        public string Name { get; set; }
     }
 }

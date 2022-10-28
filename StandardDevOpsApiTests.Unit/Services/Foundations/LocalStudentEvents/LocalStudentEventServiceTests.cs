@@ -1,12 +1,13 @@
-﻿using StandardDevOpsApi.Brokers.Events;
+﻿using Moq;
+
+using StandardDevOpsApi.Brokers.Events;
 using StandardDevOpsApi.Models.Students;
 using StandardDevOpsApi.Services.Foundations.LocalStudentEvents;
-using Moq;
+
 using Tynamix.ObjectFiller;
 
 namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.LocalStudentEvents
 {
-
     public partial class LocalStudentEventServiceTests
     {
         private readonly Mock<IEventBroker> eventBrokerMock;
