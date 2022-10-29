@@ -1,5 +1,9 @@
+using FluentAssertions.Common;
+
 using StandardDevOpsApi.Brokers.Apis.ElasticApis;
+using StandardDevOpsApi.Brokers.DateTimes;
 using StandardDevOpsApi.Brokers.Events;
+using StandardDevOpsApi.Brokers.Loggings;
 using StandardDevOpsApi.Brokers.Queues;
 using StandardDevOpsApi.Brokers.Storages;
 using StandardDevOpsApi.Services.Foundations.LibraryAccounts;
@@ -32,6 +36,9 @@ builder.Services.AddSingleton<ILibraryCardService, LibraryCardService>();
 builder.Services.AddSingleton<IStudentEventOrchestrationService, StudentEventOrchestrationService>();
 builder.Services.AddSingleton<ILibraryAccountOrchestrationService, LibraryAccountOrchestrationService>();
 builder.Services.AddSingleton<IElasticApiBroker, ElasticApiBroker>();
+builder.Services.AddTransient<ILoggingBroker, LoggingBroker>();
+builder.Services.AddTransient<IDateTimeBroker, DateTimeBroker>();
+builder.Services.AddLogging();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

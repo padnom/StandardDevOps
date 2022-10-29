@@ -710,7 +710,6 @@
     <None Include="StandardDevOpsApi\Brokers\Storages\StorageBroker.LibraryCards.References.cs" />
     <None Include="StandardDevOpsApi\Brokers\Storages\StorageBroker.Students.cs" />
     <None Include="StandardDevOpsApi\Controllers\StudentsController.cs" />
-    <None Include="StandardDevOpsApi\Controllers\WeatherForecastController.cs" />
     <None Include="StandardDevOpsApi\Dockerfile" />
     <None Include="StandardDevOpsApi\Migrations\20220123160022_AddStudentModel.cs" />
     <None Include="StandardDevOpsApi\Migrations\20220123160022_AddStudentModel.Designer.cs" />

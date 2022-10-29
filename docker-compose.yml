@@ -92,7 +92,7 @@ services:
       - elasticsearch
 
   mysqlserver:
-    image:  mcr.microsoft.com/mssql/server:2019-latest
+    image:  mcr.microsoft.com/mssql/server:2022-latest
     environment:
       MSSQL_SA_PASSWORD: "Your_password123"
       ACCEPT_EULA: "Y"

@@ -24,8 +24,4 @@
     <ProjectReference Include="..\StandardDevOpsApi\StandardDevOpsApi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Foundations\NewFolder\" />
-  </ItemGroup>
-
 </Project>

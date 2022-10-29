@@ -22,6 +22,7 @@ namespace StandardDevOpsApi.Brokers.Queues
             {
                 student.Id,
                 student.Name,
+                student.FirstName,
                 student.LibraryAccount
             });
         }       
