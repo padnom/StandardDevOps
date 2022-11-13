@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch;
-
-using StandardDevOpsApi.Models.Students;
-using StandardDevOpsApi.Services.Foundations.LocalStudentEvents;
+﻿using StandardDevOpsApi.Services.Foundations.LocalStudentEvents;
 using StandardDevOpsApi.Services.Foundations.StudentEvents;
 using StandardDevOpsApi.Services.Foundations.Students;
 
@@ -15,6 +10,7 @@ namespace StandardDevOpsApi.Services.Orchestrations.StudentEvents
         private readonly IStudentService studentService;
         private readonly ILocalStudentEventService localStudentEventService;
         private readonly IStudentIndexationService studentIndexationService;
+
 
         public StudentEventOrchestrationService(
             IStudentEventService studentEventService,

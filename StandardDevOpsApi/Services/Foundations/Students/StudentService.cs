@@ -32,7 +32,7 @@ namespace StandardDevOpsApi.Services.Foundations.Students
         {
             ValidateStudentOnRegister(student);
             Student studentInserted = await this.storageBroker.InsertStudentAsync(student);
-            await this.cacheBroker.InsertStudentAsync(studentInserted);            
+            await this.cacheBroker.InsertStudentAsync(studentInserted);
             return studentInserted;
         });
 
@@ -43,9 +43,16 @@ namespace StandardDevOpsApi.Services.Foundations.Students
         TryCatch(async () =>
         {
             ValidateStudentId(studentId);
-            Student maybeStudent = await this.storageBroker.SelectStudentByIdAsync(studentId);
-            var cache = await this.cacheBroker.SelectStudentByIdAsync(studentId.ToString());
 
+            Student studenMaybeCached = await this.cacheBroker.SelectStudentByIdAsync(studentId.ToString());
+            if (studenMaybeCached is not null)
+            {
+                ValidateStorageStudent(studenMaybeCached, studentId);
+                return studenMaybeCached;
+
+            }
+
+            Student maybeStudent = await this.storageBroker.SelectStudentByIdAsync(studentId);
             ValidateStorageStudent(maybeStudent, studentId);
 
             return maybeStudent;
