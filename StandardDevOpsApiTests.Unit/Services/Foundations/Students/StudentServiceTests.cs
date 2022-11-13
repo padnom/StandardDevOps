@@ -10,6 +10,7 @@ using Microsoft.Data.SqlClient;
 
 using Moq;
 
+using StandardDevOpsApi.Brokers.Caches;
 using StandardDevOpsApi.Brokers.DateTimes;
 using StandardDevOpsApi.Brokers.Loggings;
 using StandardDevOpsApi.Brokers.Storages;
@@ -29,16 +30,19 @@ namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.Students
         private readonly Mock<IDateTimeBroker> dateTimeBrokerMock;
         private readonly Mock<ILoggingBroker> loggingBrokerMock;
         private readonly Mock<IStorageBroker> storageBrokerMock;
+        private readonly Mock<ICacheBroker> cacheBrokerMock;
         private readonly IStudentService studentService;
 
         public StudentServiceTests()
         {
             this.storageBrokerMock = new Mock<IStorageBroker>();
+            this.cacheBrokerMock = new Mock<ICacheBroker>();
             this.dateTimeBrokerMock = new Mock<IDateTimeBroker>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
 
             this.studentService = new StudentService(
                 storageBroker: this.storageBrokerMock.Object,
+                cacheBroker: this.cacheBrokerMock.Object,
                 dateTimeBroker: this.dateTimeBrokerMock.Object,
                 loggingBroker: this.loggingBrokerMock.Object);
         }

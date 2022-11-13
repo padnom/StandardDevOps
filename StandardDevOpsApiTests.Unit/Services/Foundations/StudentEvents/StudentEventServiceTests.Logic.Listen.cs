@@ -34,10 +34,6 @@ namespace StandardDevOpsApi.Tests.Unit.Services.Foundations.StudentEvents
                 studentEventHandler: studentEventHandlerMock.Object);
 
             // then
-            studentEventHandlerMock.Verify(handler =>
-                handler.Invoke(It.Is(SameStudentAs(incomingStudent))),
-                    Times.Once());
-
             this.queueBrokerMock.Verify(broker =>
                 broker.ListenToStudentsQueue(
                     It.IsAny<Func<Message, CancellationToken, Task>>()),
