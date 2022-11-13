@@ -1,6 +1,7 @@
 using FluentAssertions.Common;
 
 using StandardDevOpsApi.Brokers.Apis.ElasticApis;
+using StandardDevOpsApi.Brokers.Caches;
 using StandardDevOpsApi.Brokers.DateTimes;
 using StandardDevOpsApi.Brokers.Events;
 using StandardDevOpsApi.Brokers.Loggings;
@@ -24,6 +25,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<StorageBroker>();
 builder.Services.AddSingleton<IStorageBroker, StorageBroker>();
+builder.Services.AddSingleton<ICacheBroker, CacheBroker>();
 builder.Services.AddSingleton<IQueueBrokerMassTransit, QueueBrokerMassTransit>();
 builder.Services.AddSingleton<IQueueBroker, QueueBroker>();
 builder.Services.AddSingleton<IEventBroker, EventBroker>();

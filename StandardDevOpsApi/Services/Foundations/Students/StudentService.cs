@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 
+using StandardDevOpsApi.Brokers.Caches;
 using StandardDevOpsApi.Brokers.DateTimes;
 using StandardDevOpsApi.Brokers.Loggings;
 using StandardDevOpsApi.Brokers.Storages;
@@ -10,15 +11,18 @@ namespace StandardDevOpsApi.Services.Foundations.Students
     public partial class StudentService : IStudentService
     {
         private readonly IStorageBroker storageBroker;
+        private readonly ICacheBroker cacheBroker;
         private readonly IDateTimeBroker dateTimeBroker;
         private readonly ILoggingBroker loggingBroker;
 
         public StudentService(
             IStorageBroker storageBroker,
+            ICacheBroker cacheBroker,
             IDateTimeBroker dateTimeBroker,
             ILoggingBroker loggingBroker)
         {
             this.storageBroker = storageBroker;
+            this.cacheBroker = cacheBroker;
             this.dateTimeBroker = dateTimeBroker;
             this.loggingBroker = loggingBroker;
         }
@@ -27,8 +31,9 @@ namespace StandardDevOpsApi.Services.Foundations.Students
         TryCatch(async () =>
         {
             ValidateStudentOnRegister(student);
-
-            return await this.storageBroker.InsertStudentAsync(student);
+            Student studentInserted = await this.storageBroker.InsertStudentAsync(student);
+            await this.cacheBroker.InsertStudentAsync(studentInserted);            
+            return studentInserted;
         });
 
         public IQueryable<Student> RetrieveAllStudents() =>
@@ -39,6 +44,8 @@ namespace StandardDevOpsApi.Services.Foundations.Students
         {
             ValidateStudentId(studentId);
             Student maybeStudent = await this.storageBroker.SelectStudentByIdAsync(studentId);
+            var cache = await this.cacheBroker.SelectStudentByIdAsync(studentId.ToString());
+
             ValidateStorageStudent(maybeStudent, studentId);
 
             return maybeStudent;
@@ -56,6 +63,8 @@ namespace StandardDevOpsApi.Services.Foundations.Students
 
             return await this.storageBroker.UpdateStudentAsync(student);
         });
+
+
 
         public ValueTask<Student> RemoveStudentByIdAsync(Guid studentId) =>
         TryCatch(async () =>

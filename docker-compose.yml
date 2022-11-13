@@ -119,6 +119,21 @@ services:
     networks:
       - elk
 
+
+  redis:
+    image: redis:6.2-alpine
+    environment:
+      REDIS_PASSWORD: "Your_password123"
+    #  #REDIS_PORT: "6379"
+    restart: always
+    ports:
+      - '6379:6379'
+    #command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+    networks:
+      - elk
+
 networks:
   elk:
     driver: bridge
@@ -127,3 +142,5 @@ volumes:
   setup:
   elasticsearch:
   mysqlserver:
+  cache:
+    driver: local

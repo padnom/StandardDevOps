@@ -785,7 +785,6 @@
     <Folder Include="dockers\kibana\obj\Docker\empty\" />
     <Folder Include="dockers\logstash\obj\Docker\empty\" />
     <Folder Include="dockers\setup\obj\Docker\empty\" />
-    <Folder Include="StandardDevOpsApi\obj\Docker\empty\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="setup\**" />
@@ -804,5 +803,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="dockers\volumes\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="StandardDevOpsApi\**" />
   </ItemGroup>
 </Project>
